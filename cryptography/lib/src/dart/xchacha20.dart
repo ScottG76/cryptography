@@ -146,13 +146,13 @@ class DartXchacha20 extends Xchacha20 {
     final mac = await macAlgorithm.calculateMac(
       cipherText,
       secretKey: secretKey,
-      nonce: nonce,
+      nonce: newNonce,
       aad: aad,
     );
 
     return SecretBox(
       cipherText,
-      nonce: newNonce,
+      nonce: nonce,
       mac: mac,
     );
   }

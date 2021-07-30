@@ -152,7 +152,7 @@ class DartXchacha20 extends Xchacha20 {
 
     return SecretBox(
       cipherText,
-      nonce: nonce,
+      nonce: newNonce,
       mac: mac,
     );
   }

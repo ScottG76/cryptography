@@ -72,11 +72,16 @@ class DartXchacha20 extends Xchacha20 {
     for (var i = 0; i < 8; i++) {
       newNonce[4 + i] = nonceBytes[16 + i];
     }
-    
-    await secretBox.checkMac(
+   
+    final secretBox2 = SecretBox(
+      secretBox.cipherText,
+      nonce: newNonce,
+      mac: secretBox.mac,
+    );
+      
+    await secretBox2.checkMac(
       macAlgorithm: macAlgorithm,
       secretKey: secretKey,
-      nonce: newNonce,
       aad: aad,
     );
 

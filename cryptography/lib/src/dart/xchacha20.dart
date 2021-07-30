@@ -57,11 +57,6 @@ class DartXchacha20 extends Xchacha20 {
         'Must have 24 bytes',
       );
     }
-    await secretBox.checkMac(
-      macAlgorithm: macAlgorithm,
-      secretKey: secretKey,
-      aad: aad,
-    );
 
     // Create a new secret key with hchacha20.
     final nonceBytes = Uint8List.fromList(nonce);
@@ -77,6 +72,13 @@ class DartXchacha20 extends Xchacha20 {
     for (var i = 0; i < 8; i++) {
       newNonce[4 + i] = nonceBytes[16 + i];
     }
+    
+    await secretBox.checkMac(
+      macAlgorithm: macAlgorithm,
+      secretKey: secretKey,
+      nonce: newNonce,
+      aad: aad,
+    );
 
     // Decrypt with chacha20
     return _chacha20.decrypt(

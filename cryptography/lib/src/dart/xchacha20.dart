@@ -138,6 +138,7 @@ class DartXchacha20 extends Xchacha20 {
       newNonceBytes[4 + i] = nonceBytes[16 + i];
     }
     final newNonce = newNonceBytes;
+    final newNonce2 = newNonceBytes;
 
     // Encrypt with chacha20
     final resultWithNewNonce = await _chacha20.encrypt(
@@ -153,7 +154,7 @@ class DartXchacha20 extends Xchacha20 {
     final mac = await macAlgorithm.calculateMac(
       cipherText,
       secretKey: secretKey,
-      nonce: newNonce,
+      nonce: newNonce2,
       aad: aad,
     );
 
